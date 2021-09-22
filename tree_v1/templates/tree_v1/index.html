@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% load mptt_tags %}
+
+{% full_tree_for_model tree_v1.Department as drilldown %}
+{% for node,structure in drilldown|tree_info %}
+    {% if  structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+    {% if node == drilldown %}
+        <strong>{{ node.name }}</strong>
+    {% else %}
+        <a href="{% url 'general' drilldown.pk %}">{{ node.name }}</a>
+        {% if node.parent_id == drilldown.pk %}Главный{% else %}Подчиненный{% endif %}
+    {% endif %}
+    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+{% endfor %}
+</body>
+</html>

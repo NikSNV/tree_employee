@@ -1,0 +1,65 @@
+<html>
+  <head>
+	{% if title %}
+    <title>{{title}} - project</title>
+    {% else %}
+    <title>Abz-project</title>
+    {% endif %}
+  </head>
+  <body>
+    <ul>
+      {% for employee in empl %}
+      <li>
+        <strong>Имя:</strong>  {{employee.pk}} {{employee.fio}}<br>
+        <strong>Должность:</strong> {{employee.post}}<br>
+        <strong>Размер заработной платы:</strong> {{employee.salary}}<br>
+        <strong>Дата приема на работу:</strong> {{employee.date_create}}<br>
+        <strong>Сотрудники: </strong>
+        <ul>
+          {% for subordinate in employee.subordinates %}
+          <li>
+            <strong>Имя:</strong> {{subordinate.pk}} {{subordinate.fio}}<br>
+            <strong>Должность:</strong> {{subordinate.post}}<br>
+            <strong>Размер заработной платы:</strong> {{subordinate.salary}}<br>
+            <strong>Дата приема на работу:</strong> {{subordinate.date_create}}<br>
+			<strong>Сотрудники: </strong>
+			<ul>
+			  {% for subordinate in subordinate.subordinates %}
+			  <li>
+				<strong>Имя:</strong> {{subordinate.fio}}<br>
+				<strong>Должность:</strong> {{subordinate.post}}<br>
+				<strong>Размер заработной платы:</strong> {{subordinate.salary}}<br>
+				<strong>Дата приема на работу:</strong> {{subordinate.date_create}}<br>
+				<strong>Сотрудники: </strong>
+				<ul>
+				  {% for subordinate in subordinate.subordinates %}
+				  <li>
+					<strong>Имя:</strong> {{subordinate.fio}}<br>
+					<strong>Должность:</strong> {{subordinate.post}}<br>
+					<strong>Размер заработной платы:</strong> {{subordinate.salary}}<br>
+					<strong>Дата приема на работу:</strong> {{subordinate.date_create}}<br>
+					<strong>Сотрудники: </strong>
+					<ul>
+					  {% for subordinate in subordinate.subordinates %}
+					  <li>
+						<strong>Имя:</strong> {{subordinate.fio}}<br>
+						<strong>Должность:</strong> {{subordinate.post}}<br>
+						<strong>Размер заработной платы:</strong> {{subordinate.salary}}<br>
+						<strong>Дата приема на работу:</strong> {{subordinate.date_create}}<br>
+					  </li>
+					  {% endfor %}
+					</ul>
+				  </li>
+				  {% endfor %}
+				</ul>
+			  </li>
+			  {% endfor %}
+			</ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
